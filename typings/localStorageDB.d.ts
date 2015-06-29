@@ -6,6 +6,7 @@
  */
 
 declare type localStorageDB_callback = (object:localStorageDB_fields) => localStorageDB_dynamicFields;
+declare type localStorageDB_callbackFilter = (object:localStorageDB_fields) => boolean;
 
 declare class localStorageDB
 {
@@ -20,26 +21,26 @@ declare class localStorageDB
 	createTable(table:string,fields?:localStorageDB_fields); // Creates a table - fields is an array of string fieldnames. 'ID' is a reserved fieldname.
 	createTableWithData(table:string,rows:{[T:string]:any}[]);
 	/*
-	Creates a table and populates it
-	rows is an array of object literals where each object represents a record
-	[{field1: val, field2: val}, {field1: val, field2: val}]
-	*/
+	 Creates a table and populates it
+	 rows is an array of object literals where each object represents a record
+	 [{field1: val, field2: val}, {field1: val, field2: val}]
+	 */
 	alterTable(table:string,new_fields:any,default_values:any);
 	/*
-	Alter a table
-	- new_fields can be a array of columns OR a string of single column.
-	- default_values (optional) can be a object of column's default values OR a default value string for single column for existing rows.
-	*/
+	 Alter a table
+	 - new_fields can be a array of columns OR a string of single column.
+	 - default_values (optional) can be a object of column's default values OR a default value string for single column for existing rows.
+	 */
 	dropTable(table:string): void; // Deletes a table from the database
 	truncate(table:string): void; // Empties all records in a table and resets the internal auto increment ID to 0
 	columnExists(table:string,field:string): boolean; // Checks whether a column exists in database table.
 	rowCount(table:string): number; // Returns the number of rows in a table
 	insert(table:string, data:{[T:string]:any}): number;
 	/*
-	Inserts a row into a table and returns its numerical ID
-	- data is an object literal with field-values
-	every row is assigned an auto-incremented numerical ID automatically
-	*/
+	 Inserts a row into a table and returns its numerical ID
+	 - data is an object literal with field-values
+	 every row is assigned an auto-incremented numerical ID automatically
+	 */
 	query(table:string,query?:{[T:string]:any},limit?:number,start?:number,sort?:any): localStorageDB_fields[];
 	/* DEPRECATED
 	 Returns an array of rows (object literals) from a table matching the query.
@@ -49,7 +50,7 @@ declare class localStorageDB
 	 - sort is an array of sort conditions, each one of which is an array in itself with two values
 	 - distinct is an array of fields whose values have to be unique in the returned rows
 	 Every returned row will have it's internal auto-incremented id assigned to the variable ID
-	*/
+	 */
 	queryAll(table:string,params:localStorageDB_queryParams): localStorageDB_fields[];
 	/*
 	 Returns an array of rows (object literals) from a table matching the query.
@@ -60,22 +61,22 @@ declare class localStorageDB
 	 - distinct is an array of fields whose values have to be unique in the returned rows
 	 Every returned row will have it's internal auto-incremented id assigned to the variable ID
 	 */
-	update(table:string,query:localStorageDB_dynamicFields|localStorageDB_callback,update?:localStorageDB_callback): number;
+	update(table:string,query:localStorageDB_dynamicFields|localStorageDB_callbackFilter,update?:localStorageDB_callback): number;
 	/*
 	 Updates existing records in a table matching query, and returns the number of rows affected
 	 - query is an object literal or a function. If query is not supplied, all rows are updated
 	 - update_function is a function that returns an object literal with the updated values
 	 */
-	insertOrUpdate(table:string,query:localStorageDB_dynamicFields|localStorageDB_callback,data:localStorageDB_fields): number;
+	insertOrUpdate(table:string,query:localStorageDB_dynamicFields|localStorageDB_callbackFilter,data:localStorageDB_fields): number;
 	/*
 	 Inserts a row into a table if the given query matches no results, or updates the rows matching the query.
 	 - query is either an object literal, function, or null.
 	 - data is an object literal with field-values
 	 Returns the numerical ID if a new row was inserted, or an array of IDs if rows were updated
 	 */
-	deleteRows(table:string,query:localStorageDB_dynamicFields|localStorageDB_callback): number;
+	deleteRows(table:string,query:localStorageDB_dynamicFields|localStorageDB_callbackFilter): number;
 	/*
-	Deletes rows from a table matching query, and returns the number of rows deleted
+	 Deletes rows from a table matching query, and returns the number of rows deleted
 	 - query is either an object literal or a function. If query is not supplied, all rows are deleted
 	 */
 }
