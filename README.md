@@ -11,3 +11,6 @@ Various Typescript Typings ( .d.ts )
 
 ### tether.d.ts
 [tether.js](http://github.hubspot.com/tether/) is a client-side library to make absolutely positioned elements attach to elements in the page efficiently.
+
+### localStorageDB
+[localStorageDB.js](https://github.com/knadh/localStorageDB) is a simple database layer for localStorage and sessionStorage for creating structured data in the form of databases and tables
