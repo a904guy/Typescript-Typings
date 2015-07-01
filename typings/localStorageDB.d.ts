@@ -5,8 +5,8 @@
  * Time: 11:19 AM
  */
 
-declare type localStorageDB_callback = (object:localStorageDB_fields) => localStorageDB_dynamicFields;
-declare type localStorageDB_callbackFilter = (object:localStorageDB_fields) => boolean;
+declare type localStorageDB_callback = (object:localStorageDB_dynamicFields) => localStorageDB_dynamicFields;
+declare type localStorageDB_callbackFilter = (object:localStorageDB_dynamicFields) => boolean;
 
 declare class localStorageDB
 {
@@ -41,7 +41,7 @@ declare class localStorageDB
 	 - data is an object literal with field-values
 	 every row is assigned an auto-incremented numerical ID automatically
 	 */
-	query(table:string,query?:{[T:string]:any},limit?:number,start?:number,sort?:any): localStorageDB_fields[];
+	query(table:string,query?:{[T:string]:any},limit?:number,start?:number,sort?:any): localStorageDB_fields<localStorageDB_dynamicFields>[];
 	/* DEPRECATED
 	 Returns an array of rows (object literals) from a table matching the query.
 	 - query is either an object literal or null. If query is not supplied, all rows are returned
@@ -51,7 +51,7 @@ declare class localStorageDB
 	 - distinct is an array of fields whose values have to be unique in the returned rows
 	 Every returned row will have it's internal auto-incremented id assigned to the variable ID
 	 */
-	queryAll(table:string,params:localStorageDB_queryParams): localStorageDB_fields[];
+	queryAll(table:string,params:localStorageDB_queryParams): localStorageDB_fields<localStorageDB_dynamicFields>[];
 	/*
 	 Returns an array of rows (object literals) from a table matching the query.
 	 - query is either an object literal or null. If query is not supplied, all rows are returned
@@ -67,7 +67,7 @@ declare class localStorageDB
 	 - query is an object literal or a function. If query is not supplied, all rows are updated
 	 - update_function is a function that returns an object literal with the updated values
 	 */
-	insertOrUpdate(table:string,query:localStorageDB_dynamicFields|localStorageDB_callbackFilter,data:localStorageDB_fields): number;
+	insertOrUpdate(table:string,query:localStorageDB_dynamicFields|localStorageDB_callbackFilter,data:localStorageDB_dynamicFields): number;
 	/*
 	 Inserts a row into a table if the given query matches no results, or updates the rows matching the query.
 	 - query is either an object literal, function, or null.
@@ -81,7 +81,7 @@ declare class localStorageDB
 	 */
 }
 
-interface localStorageDB_fields extends localStorageDB_dynamicFields {
+interface localStorageDB_fields<T> {
 	ID: number;
 }
 
