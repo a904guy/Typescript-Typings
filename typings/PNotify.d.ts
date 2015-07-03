@@ -7,14 +7,21 @@
 
 ///<reference path="../jquery/jquery.d.ts"/>
 
-interface PNotifyModule {
+declare module "PNotify" {
+	export = PNotifyClass;
+}
+
+declare var PNotify: PNotifyClass;
+
+declare class PNotifyClass {
 	constructor(opts:PNotifyOptions);
-	desktop?: PNotifyDesktop;
-	buttons?: PNotifyButtons;
-	nonblock?: PNotifyNonBlock;
-	confirm?: PNotifyConfirm;
-	history?: PNotifyHistory;
-	reference?: PNotifyReference;
+	options: PNotifyOptions;
+	desktop: PNotifyDesktop;
+	buttons: PNotifyButtons;
+	nonblock: PNotifyNonBlock;
+	confirm: PNotifyConfirm;
+	history: PNotifyHistory;
+	reference: PNotifyReference;
 }
 
 interface PNotifyOptions {
@@ -57,6 +64,7 @@ interface PNotifyDesktop {
 	fallback?: boolean; // true;
 	icon?: string; // null
 	tag?: string; // null
+	permission(): void;
 }
 
 interface PNotifyButtons {
@@ -110,10 +118,4 @@ interface PNotifyReference {
 	labels?: {
 		text?: string; // "Spin Around"
 	}
-}
-
-declare var PNotify: PNotifyModule;
-
-declare module "PNotify" {
-	export = PNotifyModule
 }
