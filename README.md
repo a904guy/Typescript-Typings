@@ -19,3 +19,6 @@ Various Typescript Typings ( .d.ts )
 [PNotify.js](http://sciactive.com/pnotify/) is a JavaScript notification plugin, developed by [SciActive](http://sciactive.com/). Formerly known as Pines Notify. It is designed to provide an unparalleled level of flexibility, while still being very easy to implement and use.
 
 PNotify provides desktop notifications based on the [Web Notifications Draft](http://www.w3.org/TR/notifications/). If desktop notifications are not available or not allowed, PNotify will fall back to displaying the notice as a regular, in-browser notice.
+
+### [autobahn.d.ts](https://github.com/a904guy/Typescript-Typings/blob/master/typings/autobahn.d.ts)
+[autobahn.js](https://github.com/tavendo/AutobahnJS) is WAMP in JavaScript for Browsers and NodeJS [Autobahn](http://autobahn.ws/js)
