@@ -15,6 +15,9 @@ declare var PNotify: PNotifyClass;
 
 declare class PNotifyClass {
 	constructor(opts:PNotifyOptions);
+	update(options?: PNotifyOptions): void;
+    remove(): void;
+    removeAll(): void;
 	options: PNotifyOptions;
 	desktop: PNotifyDesktop;
 	buttons: PNotifyButtons;
